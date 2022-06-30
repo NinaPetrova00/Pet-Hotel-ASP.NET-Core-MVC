@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Pet_Hotel.Models.Review>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Reviews</h1>
+<style>
+   .myEditBtn {
+  color: black;  
+  border: 2px solid #949494;
+   background-color: #b8dcf8!important;
+  border-radius: 30px;
+  padding: 3px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  }
+  .myDetailsBtn {
+  color: black;  
+  border: 2px solid #949494;
+   background-color:#b2ffb9!important;
+  border-radius: 30px;
+  padding: 2px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  }
+  .myDeleteBtn {
+  color: black;  
+  border: 2px solid #949494;
+   background-color:  #ff7a7a!important;
+  border-radius: 30px;
+  padding: 2px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+</style>
+
+<p>
+    <a asp-action="Create"; class="myEditBtn">Add new review</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+              <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+           <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="myEditBtn">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id"  class="myDetailsBtn">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"  class="myDeleteBtn">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

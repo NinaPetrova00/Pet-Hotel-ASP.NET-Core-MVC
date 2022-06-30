@@ -1,0 +1,122 @@
+﻿@model Pet_Hotel.Models.PetTypeViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pets</h1>
+<style>
+   .myEditBtn {
+  color: black;  
+  border: 2px solid #949494;
+   background-color: #b8dcf8!important;
+  border-radius: 30px;
+  padding: 3px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  }
+  .myDetailsBtn {
+  color: black;  
+  border: 2px solid #949494;
+   background-color:#b2ffb9!important;
+  border-radius: 30px;
+  padding: 2px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  }
+  .myDeleteBtn {
+  color: black;  
+  border: 2px solid #949494;
+   background-color:  #ff7a7a!important;
+  border-radius: 30px;
+  padding: 2px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+</style>
+
+<p>
+    <a asp-action="Create"; class="myEditBtn">Add new pet</a>
+</p>
+<form asp-controller="Pets" asp-action="Index" method="get">
+    <p>
+        <!--Pet Type-->
+        <select asp-for="PetType" asp-items="Model.Types">
+            <option value="">All Pets</option>
+        </select>
+
+        <!--Pet Name-->
+        Name: <input type="text" asp-for="SearchName" />
+         <input type="submit" value="Filter" />
+
+         <!--Pet Breed-->
+           Breed: <input type="text" asp-for="SearchBreed" />
+        <input type="submit" value="Filter" />
+
+        <!--Pet Owner-->
+        Pet Owner: <input type="text" asp-for="SearchPetOwner" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pets[0].Name)
+             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pets[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pets[0].Breed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pets[0].Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pets[0].PetOwner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pets[0].checkedIn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pets[0].checkedOut)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Pets) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Breed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PetOwner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.checkedIn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.checkedOut)
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="myEditBtn">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id"  class="myDetailsBtn">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"  class="myDeleteBtn">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
